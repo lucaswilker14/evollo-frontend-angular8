@@ -6,11 +6,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HomePageComponent } from './home-page/home-page.component';
+import {routing} from './app.routing';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     ToastrModule.forRoot({
       maxOpened: 1,
       tapToDismiss: true,
-      messageClass: 'center' })
+      messageClass: 'center' }),
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
