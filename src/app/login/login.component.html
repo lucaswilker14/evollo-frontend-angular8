@@ -1,0 +1,72 @@
+<!--Main Navigation-->
+<header class="intro-header">
+    <!--Intro Section-->
+    <section class="view intro-2">
+        <div class="full-bg-img mask rgba-gradient">
+            <div class="container flex-center">
+                <div class="d-flex align-items-center content-height w-100">
+                    <div class="row flex-center pt-5 mt-3 w-100">
+                        <div class="col-md-6 text-center text-md-left mb-5">
+                            <div class="black-text">
+                                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Prova
+                                    Técnica
+                                    Evollo! </h2>
+                                <hr class="hr-dark wow fadeInLeft" data-wow-delay="0.3s">
+                                <br>
+                                <a mdbBtn href="https://github.com/lucaswilker14?tab=repositories" target="_blank"
+                                   color="black" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"
+                                   mdbWavesEffect>GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl-5 offset-xl-1">
+                            <!--Form-->
+                            <form novalidate="" #formControl>
+                                <mdb-card class="form wow fadeInRight" data-wow-delay="0.3s">
+                                    <mdb-card-body>
+                                        <!--Header-->
+                                        <div class="text-center">
+                                            <h3 class="black-text">
+                                                <mdb-icon fas icon="user" class="text-black-50"></mdb-icon>
+                                                Login:
+                                            </h3>
+                                            <hr class="hr-dark">
+                                        </div>
+                                        <!--Body-->
+                                        <div class="md-form">
+                                            <label class="text-black-50 form-control-label"
+                                                   for="username">Username:</label>
+                                            <input type="text" class="text-black-50 form-control" id="username"
+                                                   name="username" [(ngModel)]="user.username" required mdbInput>
+                                            <div class="valid-feedback"></div>
+                                            <div class="invalid-feedback">Username é requirido</div>
+                                        </div>
+                                        <div class="md-form">
+                                            <label class="text-black-50 form-control-label"
+                                                   for="password">Password:</label>
+                                            <input type="password" class="text-black-50 form-control" id="password"
+                                                   name="password" [(ngModel)]="user.password" required mdbInput>
+                                            <div class="valid-feedback"></div>
+                                            <div class="invalid-feedback">Password é requerido</div>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button (click)="login($event)" mdbBtn color="blue-grey" mdbWavesEffect>Sign
+                                                in
+                                            </button>
+                                        </div>
+                                    </mdb-card-body>
+                                </mdb-card>
+                            </form>
+                            <!--/.Form-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</header>
+<!--Main Navigation-->
+
+
+
