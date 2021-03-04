@@ -10,12 +10,10 @@
     <span>Página Home</span>
     <div class="spacer"></div>
     <div id="logout">
-        <a style="color: white" target="_blank" rel="noopener" routerLink="/" >
+        <a style="color: white" target="_blank" rel="noopener" routerLink="/">
             Logout
         </a>
     </div>
-
-
 
 
 </div>
@@ -24,10 +22,11 @@
     <div class="card-deck">
 
         <!-- Card -->
-        <mdb-card >
+        <mdb-card>
             <div class="view" mdbWavesEffect>
                 <!-- Card img -->
-                <mdb-card-img class="img-fluid" src="/assets/images/new_company.jpeg" alt="Card image cap"></mdb-card-img>
+                <mdb-card-img class="img-fluid" src="/assets/images/new_company.jpeg"
+                              alt="Card image cap"></mdb-card-img>
                 <div class="mask pattern-1 flex-center"></div>
             </div>
             <!--Card content-->
@@ -38,7 +37,9 @@
                 </mdb-card-title>
 
                 <div class="row justify-content-center">
-                    <button size="sm" mdbBtn type="button" color="primary" rounded="true" outline="true" mdbWavesEffect>Ir!</button>
+                    <button [routerLink]="['/company']" size="sm" mdbBtn type="button" color="primary" rounded="true"
+                            outline="true" mdbWavesEffect>Ir!
+                    </button>
                 </div>
             </mdb-card-body>
         </mdb-card>
@@ -58,7 +59,9 @@
                 </mdb-card-title>
 
                 <div class="row justify-content-center">
-                    <button size="sm" mdbBtn type="button" color="primary" rounded="true" outline="true" mdbWavesEffect>Ir!</button>
+                    <button [routerLink]="['/registerEmployee']" size="sm" mdbBtn type="button" color="primary"
+                            rounded="true" outline="true" mdbWavesEffect>Ir!
+                    </button>
                 </div>
             </mdb-card-body>
         </mdb-card>
@@ -78,7 +81,9 @@
                 </mdb-card-title>
 
                 <div class="row justify-content-center">
-                    <button mdbBtn size="sm" type="button" color="primary" rounded="true" outline="true" mdbWavesEffect>Ir!</button>
+                    <button [routerLink]="['/employees']" mdbBtn size="sm" type="button" color="primary" rounded="true"
+                            outline="true" mdbWavesEffect>Ir!
+                    </button>
                 </div>
             </mdb-card-body>
         </mdb-card>
@@ -99,7 +104,9 @@
                 </mdb-card-title>
 
                 <div class="row justify-content-center">
-                    <button mdbBtn size="sm" type="button" color="primary" rounded="true" outline="true" mdbWavesEffect>Ir!</button>
+                    <button [routerLink]="['/employee/:id']" mdbBtn size="sm" type="button" color="primary"
+                            rounded="true" outline="true" mdbWavesEffect>Ir!
+                    </button>
                 </div>
             </mdb-card-body>
         </mdb-card>

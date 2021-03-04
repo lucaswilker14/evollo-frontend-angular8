@@ -1,6 +1,6 @@
 import {Injectable, TemplateRef} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AppConstants } from '../../app-constants';
+import {HttpClient} from '@angular/common/http';
+import {AppConstants} from '../../app-constants';
 import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
@@ -8,7 +8,8 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class LoginService {
 
-    constructor(private http: HttpClient, private toast: ToastrService) { }
+    constructor(private http: HttpClient, private toast: ToastrService) {
+    }
 
     login = (user) => {
         return this.http.post(AppConstants.baseApi + '/auth/login', user, AppConstants.httpHearders)
@@ -22,5 +23,5 @@ export class LoginService {
                     console.log(error);
                 }
             );
-    }
+    };
 }
