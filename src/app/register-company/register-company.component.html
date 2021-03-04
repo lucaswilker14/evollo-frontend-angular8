@@ -1,1 +1,50 @@
-<p>register-company works!</p>
+<app-header title="Crie sua Empresa"></app-header>
+<app-svg-main></app-svg-main>
+
+<form class="container text-center border border-light p-5" style="margin-top: 10%">
+
+    <p class="h4 mb-4">Registro Empresa</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <label for="companyName"></label>
+            <input type="text" id="companyName" class="form-control" placeholder="Nome">
+        </div>
+        <div class="col">
+            <label for="cnpj"></label>
+            <input type="text" id="cnpj" class="form-control" placeholder="CNPJ">
+        </div>
+    </div>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <label for="city"></label>
+            <input type="text" id="city" class="form-control" placeholder="Cidade">
+        </div>
+        <div class="col">
+            <label for="state"></label>
+            <input type="text" id="state" class="form-control" placeholder="Estado">
+        </div>
+    </div>
+
+    <div>
+        <label for="address"></label>
+        <input type="text" id="address" class="form-control mb-4" placeholder="Endereço">
+    </div>
+
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <!-- Sign up button -->
+            <button mdbBtn (click)="goBack()" color="primary" outline="true" block="true" class="my-4" type="submit">
+                Voltar
+            </button>
+        </div>
+        <div class="col">
+            <!-- Sign up button -->
+            <button mdbBtn (click)="registerUser()" color="light-blue" block="true" class="my-4" type="submit">Cadastrar</button>
+        </div>
+    </div>
+
+
+</form>
