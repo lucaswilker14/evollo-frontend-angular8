@@ -13,6 +13,8 @@ import {RegisterCompanyComponent} from './register-company/register-company.comp
 import {TableEmployeesComponent} from './table-employees/table-employees.component';
 import {EmployeeDataComponent} from './employee-data/employee-data.component';
 import {RoutingModule} from './routing/routing.module';
+import { HeaderComponent } from './header/header.component';
+import { SvgMainComponent } from './svg-main/svg-main.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +24,9 @@ import {RoutingModule} from './routing/routing.module';
         RegisterEmployeeComponent,
         RegisterCompanyComponent,
         TableEmployeesComponent,
-        EmployeeDataComponent
+        EmployeeDataComponent,
+        HeaderComponent,
+        SvgMainComponent
     ],
     imports: [
         BrowserModule,
