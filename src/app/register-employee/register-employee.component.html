@@ -1,1 +1,59 @@
-<p>register-employee works!</p>
+<app-header></app-header>
+<app-svg-main></app-svg-main>
+
+<form class="container text-center border border-light p-5" style="margin-top: 10%">
+
+    <p class="h4 mb-4">Registro Funcionário</p>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <label for="fullName"></label>
+            <input type="text" id="fullName" class="form-control" placeholder="Nome Completo">
+        </div>
+    </div>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <label for="email"></label>
+            <input type="email" id="email" class="form-control" placeholder="E-mail">
+        </div>
+        <div class="col">
+            <label for="cpf"></label>
+            <input type="email" id="cpf" class="form-control" placeholder="CPF 111.000.111-56">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="jobRole"></label>
+            <input type="text" id="jobRole" class="form-control" placeholder="Cargo">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="salary"></label>
+            <input type="text" class="form-control" id="salary" placeholder="Salário R$">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="permission"></label>
+            <select id="permission" class="form-control">
+                <option selected>Permissão</option>
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row mb-4">
+        <div class="col">
+            <!-- Sign up button -->
+            <button mdbBtn (click)="goBack()" color="primary" outline="true" block="true" class="my-4" type="submit">
+                Voltar
+            </button>
+        </div>
+        <div class="col">
+            <!-- Sign up button -->
+            <button mdbBtn (click)="registerUser()" color="light-blue" block="true" class="my-4" type="submit">Cadastrar</button>
+        </div>
+    </div>
+
+
+</form>
