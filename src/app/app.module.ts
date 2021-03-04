@@ -8,12 +8,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { HomePageComponent } from './home-page/home-page.component';
 import {routing} from './app.routing';
 import {LoginComponent} from './login/login.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     LoginComponent
+
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,9 @@ import {LoginComponent} from './login/login.component';
       maxOpened: 1,
       tapToDismiss: true,
       messageClass: 'center' }),
-    routing
+    routing,
+    MDBBootstrapModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
