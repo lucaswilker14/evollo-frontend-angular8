@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeDataService} from './employee-data.service';
 import {ToastrService} from 'ngx-toastr';
 
@@ -9,12 +9,14 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './employee-data.component.html',
     styleUrls: ['./employee-data.component.css']
 })
-export class EmployeeDataComponent implements OnInit {
-
+export class EmployeeDataComponent implements OnInit, OnDestroy {
 
     @ViewChild('password') password: ElementRef;
+
     isHiddenUpdateButton = false;
     isHiddenLoadingButton = true;
+
+    @Input() tittle = 'Dados Usuário';
 
     employeeData: any = {
         name: '',
@@ -28,7 +30,7 @@ export class EmployeeDataComponent implements OnInit {
     userData: any = {
         name: '',
         username: '',
-        password: '*****'
+        password: ''
     };
 
     optionPermissions = [
@@ -36,14 +38,28 @@ export class EmployeeDataComponent implements OnInit {
         {name: 'Admin', value: 'ADMIN'}
     ];
 
-    constructor(private employeeDataService: EmployeeDataService, private router: Router, private toast: ToastrService) {
+    idUser;
+    idUserSession;
+
+
+    constructor(private employeeDataService: EmployeeDataService, private router: Router,
+                private toast: ToastrService, private activedRoute: ActivatedRoute) {
     }
 
+    ngOnDestroy(): void {
+        this.userData = {};
+        this.employeeData = {};
+    }
 
     ngOnInit(): void {
         // @ts-ignore
-        const id: any = jwtDecode(localStorage.getItem('token')).id;
-        this.employeeDataService.getEmployeeById(id)
+        this.idUserSession = jwtDecode(localStorage.getItem('token')).id;
+
+        this.activedRoute.params.subscribe((params: any) => {
+            this.idUser = params.id;
+        });
+
+        this.employeeDataService.getEmployeeById(this.idUser)
             .subscribe((data: any) => {
                 this.employeeData = data.body.employee;
                 this.userData = data.body.user;
@@ -55,20 +71,33 @@ export class EmployeeDataComponent implements OnInit {
     };
 
     update = () => {
-        this.isHiddenUpdateButton = true;
-        this.isHiddenLoadingButton = false;
+        console.log(this.userData);
+
+        this.swapLoadingButton(true, false);
         this.userData.password = this.password.nativeElement.value;
         this.userData.name = this.employeeData.name;
-        this.employeeDataService.updateEmployee(this.employeeData)
+
+        this.employeeDataService.updateEmployee(this.idUser, this.employeeData)
             .subscribe((data: any) => {
+                console.log(data);
                 this.toast.success('Atualizado com Sucesso');
-                this.isHiddenUpdateButton = false;
-                this.isHiddenLoadingButton = true;
+                this.swapLoadingButton(false, true);
             }, error => console.log(error));
 
-        this.employeeDataService.updateUser(this.userData)
+        this.employeeDataService.updateUser(this.idUser, this.userData)
             .subscribe((data: any) => {
+                console.log(data);
                 this.toast.success('Atualizado com Sucesso');
             }, error => console.log(error));
+    };
+
+    swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
+        this.isHiddenUpdateButton = isHiddenRegister;
+        this.isHiddenLoadingButton = isHiddenLoading;
+    };
+
+    checkUpdatePermission = () => {
+        return this.employeeData.permission === 'ADMIN'
+            && this.employeeData.id !== this.idUserSession;
     };
 }

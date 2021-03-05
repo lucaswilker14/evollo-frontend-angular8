@@ -1,15 +1,16 @@
-<app-header title='Seus Dados'></app-header>
+<app-header [title]=tittle></app-header>
 <app-svg-main></app-svg-main>
 
 <form class="container text-center border border-light p-5" style="margin-top: 10%">
 
-    <p class="h4 mb-4">Seus Dados</p>
+    <p class="h4 mb-4">Dados</p>
 
     <!--Full Name-->
     <div class="form-row mb-4 md-form">
         <div class="col">
             <label for="fullName">Nome</label>
-            <input class="form-control" [(ngModel)]="employeeData.name" name="name" type="text" id="fullName" mdbInput>
+            <input class="form-control"
+                   [(ngModel)]="employeeData.name" name="name" type="text" id="fullName" mdbInput>
         </div>
     </div>
 
@@ -23,7 +24,8 @@
         <!--CPF-->
         <div class="col">
             <label class="form-control-label" for="cpf">CPF</label>
-            <input [(ngModel)]="employeeData.cpf" name="cpf" type="text" id="cpf" class="form-control" mdbInput>
+            <input [disabled]="checkUpdatePermission()" [(ngModel)]="employeeData.cpf" name="cpf" type="text" id="cpf"
+                   class="form-control" mdbInput>
         </div>
     </div>
 
@@ -58,14 +60,16 @@
         <!--Username-->
         <div class="col">
             <label class="form-control-label" for="username">Username</label>
-            <input [(ngModel)]="userData.username" name="username" type="text" id="username" class="form-control"
+            <input [disabled]="checkUpdatePermission()" [(ngModel)]="userData.username" name="username" type="text"
+                   id="username" class="form-control"
                    placeholder="Username" mdbInput>
         </div>
 
         <!--Password-->
         <div class="col">
             <label class="form-control-label" for="password">Password</label>
-            <input  #password type="password" id="password" class="form-control" mdbInput>
+            <input [disabled]="checkUpdatePermission()" #password type="password" id="password" class="form-control"
+                   mdbInput>
         </div>
     </div>
 
@@ -78,10 +82,12 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button [hidden]="isHiddenUpdateButton" mdbBtn (click)="update()" color="light-blue" block="true" class="my-4" type="button">
+            <button [hidden]="isHiddenUpdateButton" mdbBtn (click)="update()" color="light-blue" block="true"
+                    class="my-4" type="button">
                 Atualizar
             </button>
-            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button" disabled>
+            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button"
+                    disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Atualizando...
             </button>

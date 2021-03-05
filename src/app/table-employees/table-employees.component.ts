@@ -1,6 +1,8 @@
-import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Output} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import {Router} from '@angular/router';
+import {EmployeeDataService} from '../employee-data/employee-data.service';
+import {log} from 'util';
 
 @Component({
     selector: 'app-table-employees',
@@ -9,143 +11,25 @@ import {Router} from '@angular/router';
 })
 export class TableEmployeesComponent implements OnInit, AfterViewInit {
 
-    elements2: any = [
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-        {
-            id: 1,
-            name: 'Mark',
-            email: 'lucas@gmail.com',
-            cpf: 'Otto',
-            company: 'Virtus',
-            jobRole: '@mdo',
-            salary: 'R$ 1000',
-            permission: 'USER',
-            util: 'editar/deletar'
-        },
-
-    ];
+    employees: any = [];
 
     @ViewChild(MdbTablePaginationComponent, {static: true}) mdbTablePagination: MdbTablePaginationComponent;
     @ViewChild(MdbTableDirective, {static: true}) mdbTable: MdbTableDirective;
-    previous: any = [];
-    headElements2 = ['ID', 'Nome', 'Email', 'CPF', 'Empresa', 'Cargo', 'Salário', 'Permissão', ''];
 
-    constructor(private cdRef: ChangeDetectorRef, private router: Router) {
+    previous: any = [];
+    headEmployees = ['ID', 'Nome', 'Email', 'CPF', 'Cargo', 'Salário', 'Permissão', ''];
+
+    constructor(private cdRef: ChangeDetectorRef, private router: Router,
+                private employeeDataService: EmployeeDataService) {
     }
 
     ngOnInit(): void {
-        this.mdbTable.setDataSource(this.elements2);
-        this.elements2 = this.mdbTable.getDataSource();
-        this.previous = this.mdbTable.getDataSource();
+        this.employeeDataService.getAllEmployee().subscribe((data: any) => {
+            this.employees = data;
+            this.mdbTable.setDataSource(this.employees);
+            this.employees = this.mdbTable.getDataSource();
+            this.previous = this.mdbTable.getDataSource();
+        });
     }
 
     ngAfterViewInit(): void {
@@ -157,6 +41,10 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
 
     goBack = () => {
         this.router.navigate(['home']);
+    };
+
+    goUpdateView = (id) => {
+        this.router.navigate(['employee/' + id]);
     };
 
 }
