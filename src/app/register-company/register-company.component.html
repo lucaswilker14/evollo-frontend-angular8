@@ -1,35 +1,51 @@
 <app-header title="Crie sua Empresa"></app-header>
 <app-svg-main></app-svg-main>
 
-<form class="container text-center border border-light p-5" style="margin-top: 10%">
+<form novalidate="" #formControl class="container text-center border border-light p-5" style="margin-top: 10%">
 
     <p class="h4 mb-4">Registro Empresa</p>
 
     <div class="form-row mb-4">
         <div class="col">
-            <label for="companyName"></label>
-            <input type="text" id="companyName" class="form-control" placeholder="Nome">
+            <label class="form-control-label" for="companyName"></label>
+            <input [(ngModel)]="registerCompany.companyName" name="companyName" type="text" id="companyName"
+                   class="form-control" placeholder="Nome" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Nome da Empresa é requirido</div>
         </div>
+
         <div class="col">
-            <label for="cnpj"></label>
-            <input type="text" id="cnpj" class="form-control" placeholder="CNPJ">
+            <label class="form-control-label" for="cnpj"></label>
+            <input [(ngModel)]="registerCompany.cnpj" name="cnpj" type="text" id="cnpj" class="form-control"
+                   placeholder="CNPJ" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Campo CNPJ é requirido</div>
         </div>
     </div>
 
     <div class="form-row mb-4">
         <div class="col">
             <label for="city"></label>
-            <input type="text" id="city" class="form-control" placeholder="Cidade">
+            <input [(ngModel)]="registerCompany.companyCity" name="city" type="text" id="city" class="form-control"
+                   placeholder="Cidade" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Campo Cidade é requirido</div>
         </div>
         <div class="col">
             <label for="state"></label>
-            <input type="text" id="state" class="form-control" placeholder="Estado">
+            <input [(ngModel)]="registerCompany.state" name="state" type="text" id="state" class="form-control"
+                   placeholder="Estado" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Campo Estado é requirido</div>
         </div>
     </div>
 
     <div>
         <label for="address"></label>
-        <input type="text" id="address" class="form-control mb-4" placeholder="Endereço">
+        <input [(ngModel)]="registerCompany.address" name="address" type="text" id="address" class="form-control mb-4"
+               placeholder="Endereço" required mdbInput>
+        <div class="valid-feedback"></div>
+        <div class="invalid-feedback">Endereço é requirido</div>
     </div>
 
 
@@ -42,9 +58,9 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button mdbBtn (click)="registerUser()" color="light-blue" block="true" class="my-4" type="submit">Cadastrar</button>
+            <button mdbBtn (click)="registerUser($event)" color="light-blue" block="true" class="my-4" type="submit">
+                Cadastrar
+            </button>
         </div>
     </div>
-
-
 </form>
