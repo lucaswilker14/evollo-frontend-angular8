@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {AppConstants} from '../app-constants';
+import {HttpClient} from '@angular/common/http';
+import jwtDecode from 'jwt-decode';
 
 @Component({
     selector: 'app-home-page',
@@ -7,9 +10,26 @@ import {Router} from '@angular/router';
     styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-    constructor(private router: Router) {
+
+    @Output() yourDataEmployee: any = {};
+
+    // @ts-ignore
+    idUser = jwtDecode(localStorage.getItem('token')).id;
+
+    constructor(private router: Router, private http: HttpClient) {
     }
 
     ngOnInit(): void {
+        // @ts-ignore
+        // const idUser: string = jwtDecode(localStorage.getItem('token')).id;
+        this.getEmployeeLoged(this.idUser);
     }
+
+
+    getEmployeeLoged = (id) => {
+        this.http.get(AppConstants.baseApi + '/employee/' + id, AppConstants.httpHearders)
+            .subscribe((data: any) => {
+                this.yourDataEmployee = data.body.employee;
+            });
+    };
 }

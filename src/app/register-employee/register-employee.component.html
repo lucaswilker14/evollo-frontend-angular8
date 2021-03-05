@@ -1,10 +1,9 @@
-<app-header title="Criação Funcionário"></app-header>
+<app-header title={{title}}></app-header>
 <app-svg-main></app-svg-main>
 
 <form novalidate="" #formControl class="container text-center border border-light p-5" style="margin-top: 10%">
 
-
-    <p class="h4 mb-4">Registro Funcionário</p>
+    <p class="h4 mb-4">{{title}}</p>
 
     <!--Full Name-->
     <div class="form-row mb-4">
@@ -79,8 +78,12 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button mdbBtn (click)="registerUser($event)" color="light-blue" block="true" class="my-4" type="button">
-                Cadastrar
+            <button mdbBtn [hidden]="isHiddenRegisterButton" (click)="registerUser($event)" color="light-blue" block="true" class="my-4" type="button">
+                {{option}}
+            </button>
+            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Cadastrando...
             </button>
         </div>
     </div>
