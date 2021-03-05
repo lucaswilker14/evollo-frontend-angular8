@@ -35,9 +35,10 @@ import { SvgMainComponent } from './svg-main/svg-main.component';
         HttpClientModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot({
-            maxOpened: 1,
+            maxOpened: 3,
             tapToDismiss: true,
-            messageClass: 'center'
+            messageClass: 'center',
+            autoDismiss: true
         }),
         MDBBootstrapModule.forRoot(),
         RoutingModule

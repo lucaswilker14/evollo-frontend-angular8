@@ -28,7 +28,7 @@ export class LoginComponent {
                     this.toast.success('Logado com Sucesso!');
                 },
                 error => {
-                    this.toast.error('Usuário não Cadastrado!');
+                    this.toast.error('Username ou Senha Inválidos!');
                     console.log(error);
                 }
             );

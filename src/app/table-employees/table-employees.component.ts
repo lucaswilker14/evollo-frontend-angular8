@@ -157,5 +157,6 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
 
     goBack = () => {
         this.router.navigate(['home']);
-    }
+    };
+
 }
