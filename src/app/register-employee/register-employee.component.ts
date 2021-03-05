@@ -16,6 +16,9 @@ export class RegisterEmployeeComponent implements OnInit {
     @Input() title = 'Registro Funcionário';
     @Input() option = 'Cadastrar';
 
+    isHiddenRegisterButton = false;
+    isHiddenLoadingButton = true;
+
     registerEmployee = {
         name: '',
         email: '',
@@ -40,21 +43,26 @@ export class RegisterEmployeeComponent implements OnInit {
 
     goBack = () => {
         this.router.navigate(['/home']);
-    }
+    };
 
     registerUser = (event) => {
+        this.isHiddenRegisterButton = true;
+        this.isHiddenLoadingButton = false;
         this.validatedFormInputs(event);
         this.registerEmployeeService.registerEmployee(this.registerEmployee)
             .subscribe(data => {
+                    this.isHiddenRegisterButton = false;
+                    this.isHiddenLoadingButton = true;
                     this.toast.success('Funcionário Registrado com Sucesso!');
                     this.toast.info('Email com credenciais enviado para o email ' + this.registerEmployee.email);
                     this.router.navigate(['home']);
+
                 },
                 error => {
                     this.toast.error('Não foi possivel cadastrar funcionário');
                 }
             );
-    }
+    };
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -63,6 +71,6 @@ export class RegisterEmployeeComponent implements OnInit {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    }
+    };
 
 }
