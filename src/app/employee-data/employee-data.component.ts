@@ -53,18 +53,13 @@ export class EmployeeDataComponent implements OnInit {
 
     update = () => {
         this.userData.password = this.password.nativeElement.value;
-        console.log(this.employeeData);
-        console.log(this.userData);
-
         this.employeeDataService.updateEmployee(this.employeeData)
             .subscribe((data: any) => {
-                console.log(data);
                 this.toast.success('Atualizado com Sucesso');
             }, error => console.log(error));
 
         this.employeeDataService.updateUser(this.userData)
             .subscribe((data: any) => {
-                console.log(data);
                 this.toast.success('Atualizado com Sucesso');
             }, error => console.log(error));
     };
