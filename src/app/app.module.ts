@@ -16,6 +16,7 @@ import {RoutingModule} from './routing/routing.module';
 import { HeaderComponent } from './header/header.component';
 import { SvgMainComponent } from './svg-main/svg-main.component';
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,7 +27,7 @@ import { SvgMainComponent } from './svg-main/svg-main.component';
         TableEmployeesComponent,
         EmployeeDataComponent,
         HeaderComponent,
-        SvgMainComponent
+        SvgMainComponent,
     ],
     imports: [
         BrowserModule,
