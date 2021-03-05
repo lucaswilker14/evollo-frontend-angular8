@@ -1,1 +1,43 @@
-<p>table-employees works!</p>
+<app-header title="Funcionários"></app-header>
+<app-svg-main></app-svg-main>
+<div class="container" style="margin-top: 5%">
+
+    <div class="container">
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+            <thead class="grey lighten-1 black-text" style="justify-content: flex-end">
+            <tr>
+                <th *ngFor="let head of headElements2; let i = index" scope="col">{{head}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let el of elements2; let i = index">
+                <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                    scope="row">{{el.id}}</th>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.cpf}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.company}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.jobRole}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.salary}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.permission}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                    <button mdbBtn size="sm" type="button" color="primary" outline="true"
+                            mdbWavesEffect>{{el.util}}
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+            <tr>
+                <td colspan="20">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements2"></mdb-table-pagination>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="container flex-center" style="margin-top: 20px">
+    <button mdbBtn (click)="goBack()" type="button" color="primary" outline="true" mdbWavesEffect>Voltar</button>
+</div>
+
