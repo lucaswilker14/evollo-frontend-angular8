@@ -1,7 +1,8 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterEmployeeService} from './register-employee.service';
 import {ToastrService} from 'ngx-toastr';
+import jwtDecode from 'jwt-decode';
 
 @Component({
     selector: 'app-register-employee',
@@ -11,6 +12,9 @@ import {ToastrService} from 'ngx-toastr';
 export class RegisterEmployeeComponent implements OnInit {
 
     @ViewChild('formControl') formControlHtml: ElementRef;
+
+    @Input() title = 'Registro Funcionário';
+    @Input() option = 'Cadastrar';
 
     registerEmployee = {
         name: '',
@@ -29,6 +33,7 @@ export class RegisterEmployeeComponent implements OnInit {
     constructor(private router: Router, private renderer: Renderer2,
                 private registerEmployeeService: RegisterEmployeeService, private toast: ToastrService) {
     }
+
 
     ngOnInit(): void {
     }
