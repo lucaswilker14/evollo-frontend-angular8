@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterCompanyService} from './register-company.service';
 import {ToastrService} from 'ngx-toastr';
@@ -8,7 +8,7 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './register-company.component.html',
     styleUrls: ['./register-company.component.css']
 })
-export class RegisterCompanyComponent implements OnInit, OnDestroy {
+export class RegisterCompanyComponent implements OnInit {
 
     constructor(private router: Router, private registerCompanyService: RegisterCompanyService,
                 private toast: ToastrService, private renderer: Renderer2) {
@@ -27,20 +27,9 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
     }
 
-
-    ngOnDestroy(): void {
-        this.registerCompany = {
-            companyName: '',
-            cnpj: '',
-            companyCity: '',
-            state: '',
-            address: ''
-        };
-    }
-
     goBack = () => {
         this.router.navigate(['home']);
-    }
+    };
 
     registerUser = (event) => {
         this.validatedFormInputs(event);
@@ -55,7 +44,7 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
                     this.toast.error('Não foi possivel cadastrar empresa');
                 }
             );
-    }
+    };
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -64,6 +53,6 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    }
+    };
 
 }
