@@ -18,7 +18,7 @@ export class LoginComponent {
     login = (event) => {
         this.validatedFormInputs(event);
         this.loginService.login(this.user);
-    };
+    }
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -27,6 +27,6 @@ export class LoginComponent {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    };
+    }
 
 }

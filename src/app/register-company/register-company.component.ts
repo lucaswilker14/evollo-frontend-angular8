@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterCompanyService} from './register-company.service';
 import {ToastrService} from 'ngx-toastr';
@@ -10,6 +10,12 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class RegisterCompanyComponent implements OnInit, OnDestroy {
 
+    constructor(private router: Router, private registerCompanyService: RegisterCompanyService,
+                private toast: ToastrService, private renderer: Renderer2) {
+    }
+
+    @ViewChild('formControl') formControlHtml: ElementRef;
+
     registerCompany: any = {
         companyName: '',
         cnpj: '',
@@ -17,9 +23,6 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
         state: '',
         address: ''
     };
-
-    constructor(private router: Router, private registerCompanyService: RegisterCompanyService, private toast: ToastrService) {
-    }
 
     ngOnInit(): void {
     }
@@ -37,9 +40,10 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
 
     goBack = () => {
         this.router.navigate(['home']);
-    };
+    }
 
-    registerUser = () => {
+    registerUser = (event) => {
+        this.validatedFormInputs(event);
         this.registerCompanyService.registerCompany(this.registerCompany)
             .subscribe(data => {
                     console.log(data);
@@ -51,6 +55,15 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
                     this.toast.error('Não foi possivel cadastrar empresa');
                 }
             );
-    };
+    }
+
+    validatedFormInputs = (event) => {
+        const InputFormControl = this.formControlHtml.nativeElement[0];
+        if (InputFormControl.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
+    }
 
 }
