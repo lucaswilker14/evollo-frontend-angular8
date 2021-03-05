@@ -14,7 +14,8 @@ export class LoginComponent {
     user = {username: '', password: ''};
     @ViewChild('formControl') formControlHtml: ElementRef;
 
-    constructor(private loginService: LoginService, private renderer: Renderer2, private toast: ToastrService, private router: Router) {
+    constructor(private loginService: LoginService, private renderer: Renderer2,
+                private toast: ToastrService, private router: Router) {
     }
 
     login = (event) => {
@@ -27,11 +28,11 @@ export class LoginComponent {
                     this.toast.success('Logado com Sucesso!');
                 },
                 error => {
-                    this.toast.error('Usuário não Cadastrado!');
+                    this.toast.error('Username ou Senha Inválidos!');
                     console.log(error);
                 }
             );
-    }
+    };
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -40,6 +41,6 @@ export class LoginComponent {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    }
+    };
 
 }
