@@ -13,6 +13,8 @@ export class EmployeeDataComponent implements OnInit {
 
 
     @ViewChild('password') password: ElementRef;
+    isHiddenUpdateButton = false;
+    isHiddenLoadingButton = true;
 
     employeeData: any = {
         name: '',
@@ -24,6 +26,7 @@ export class EmployeeDataComponent implements OnInit {
     };
 
     userData: any = {
+        name: '',
         username: '',
         password: '*****'
     };
@@ -52,10 +55,15 @@ export class EmployeeDataComponent implements OnInit {
     };
 
     update = () => {
+        this.isHiddenUpdateButton = true;
+        this.isHiddenLoadingButton = false;
         this.userData.password = this.password.nativeElement.value;
+        this.userData.name = this.employeeData.name;
         this.employeeDataService.updateEmployee(this.employeeData)
             .subscribe((data: any) => {
                 this.toast.success('Atualizado com Sucesso');
+                this.isHiddenUpdateButton = false;
+                this.isHiddenLoadingButton = true;
             }, error => console.log(error));
 
         this.employeeDataService.updateUser(this.userData)
