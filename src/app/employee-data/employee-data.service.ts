@@ -11,21 +11,25 @@ export class EmployeeDataService {
     constructor(private http: HttpClient) {
     }
 
+    getAllEmployee = () => {
+        return this.http.get(AppConstants.baseApi + '/employees', AppConstants.httpHearders);
+    };
+
     getEmployeeById = (id) => {
         return this.http.get(AppConstants.baseApi + '/employee/' + id, AppConstants.httpHearders);
-    }
+    };
 
-    updateEmployee = (employee) => {
+    updateEmployee = (id, employee) => {
         // @ts-ignore
-        const id = jwtDecode(localStorage.getItem('token')).id;
+        // const id = jwtDecode(localStorage.getItem('token')).id;
         const url = AppConstants.baseApi + '/employee/' + id;
         return this.http.put(url, employee, AppConstants.httpHearders);
-    }
+    };
 
-    updateUser = (user) => {
+    updateUser = (id, user) => {
         // @ts-ignore
-        const id = jwtDecode(localStorage.getItem('token')).id;
+        // const id = jwtDecode(localStorage.getItem('token')).id;
         const url = AppConstants.baseApi + '/user/' + id;
         return this.http.put(url, user, AppConstants.httpHearders);
-    }
+    };
 }

@@ -37,7 +37,6 @@ export class RegisterEmployeeComponent implements OnInit {
                 private registerEmployeeService: RegisterEmployeeService, private toast: ToastrService) {
     }
 
-
     ngOnInit(): void {
     }
 
@@ -46,19 +45,19 @@ export class RegisterEmployeeComponent implements OnInit {
     };
 
     registerUser = (event) => {
-        this.isHiddenRegisterButton = true;
-        this.isHiddenLoadingButton = false;
+        this.swapLoadingButton(true, false);
         this.validatedFormInputs(event);
         this.registerEmployeeService.registerEmployee(this.registerEmployee)
             .subscribe(data => {
-                    this.isHiddenRegisterButton = false;
-                    this.isHiddenLoadingButton = true;
+                    this.swapLoadingButton(false, true);
                     this.toast.success('Funcionário Registrado com Sucesso!');
                     this.toast.info('Email com credenciais enviado para o email ' + this.registerEmployee.email);
                     this.router.navigate(['home']);
 
                 },
                 error => {
+                    console.log(error);
+                    this.swapLoadingButton(false, true);
                     this.toast.error('Não foi possivel cadastrar funcionário');
                 }
             );
@@ -71,6 +70,11 @@ export class RegisterEmployeeComponent implements OnInit {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
+    };
+
+    swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
+        this.isHiddenRegisterButton = isHiddenRegister;
+        this.isHiddenLoadingButton = isHiddenLoading;
     };
 
 }
