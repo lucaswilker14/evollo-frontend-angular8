@@ -21,7 +21,6 @@ export class EmployeeDataService {
 
     updateEmployee = (id, employee) => {
         // @ts-ignore
-        // const id = jwtDecode(localStorage.getItem('token')).id;
         const url = AppConstants.baseApi + '/employee/' + id;
         return this.http.put(url, employee, AppConstants.httpHearders);
     };

@@ -71,15 +71,12 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
     };
 
     update = () => {
-        console.log(this.userData);
-
         this.swapLoadingButton(true, false);
         this.userData.password = this.password.nativeElement.value;
         this.userData.name = this.employeeData.name;
 
         this.employeeDataService.updateEmployee(this.idUser, this.employeeData)
             .subscribe((data: any) => {
-                console.log(data);
                 this.toast.success('Atualizado com Sucesso');
                 this.swapLoadingButton(false, true);
             }, error => console.log(error));

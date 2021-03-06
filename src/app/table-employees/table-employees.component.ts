@@ -17,19 +17,20 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
     @ViewChild(MdbTableDirective, {static: true}) mdbTable: MdbTableDirective;
 
     previous: any = [];
-    headEmployees = ['ID', 'Nome', 'Email', 'CPF', 'Cargo', 'Salário', 'Permissão', ''];
+    headEmployees = ['ID', 'Nome', 'Email', 'Empresa', 'CPF', 'Permissão', ''];
 
     constructor(private cdRef: ChangeDetectorRef, private router: Router,
                 private employeeDataService: EmployeeDataService) {
     }
 
     ngOnInit(): void {
-        this.employeeDataService.getAllEmployee().subscribe((data: any) => {
-            this.employees = data;
-            this.mdbTable.setDataSource(this.employees);
-            this.employees = this.mdbTable.getDataSource();
-            this.previous = this.mdbTable.getDataSource();
-        });
+        this.employeeDataService.getAllEmployee()
+            .subscribe((data: any) => {
+                this.employees = data;
+                this.mdbTable.setDataSource(this.employees);
+                this.employees = this.mdbTable.getDataSource();
+                this.previous = this.mdbTable.getDataSource();
+            });
     }
 
     ngAfterViewInit(): void {
