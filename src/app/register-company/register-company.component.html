@@ -42,7 +42,8 @@
 
     <div>
         <label for="address"></label>
-        <input [(ngModel)]="registerCompanyModel.address" name="address" type="text" id="address" class="form-control mb-4"
+        <input [(ngModel)]="registerCompanyModel.address" name="address" type="text" id="address"
+               class="form-control mb-4"
                placeholder="Endereço" required mdbInput>
         <div class="valid-feedback"></div>
         <div class="invalid-feedback">Endereço é requirido</div>
@@ -58,8 +59,14 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button mdbBtn (click)="registerCompany($event)" color="light-blue" block="true" class="my-4" type="submit">
+            <button mdbBtn [hidden]="isHiddenRegisterButton" (click)="registerCompany($event)" color="light-blue"
+                    block="true" class="my-4" type="submit">
                 Cadastrar
+            </button>
+            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button"
+                    disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Cadastrando Empresa...
             </button>
         </div>
     </div>

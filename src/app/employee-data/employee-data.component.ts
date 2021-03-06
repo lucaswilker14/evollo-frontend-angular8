@@ -77,14 +77,19 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
 
         this.employeeDataService.updateEmployee(this.idUser, this.employeeData)
             .subscribe((data: any) => {
-                this.toast.success('Atualizado com Sucesso');
-                this.swapLoadingButton(false, true);
+                setTimeout(() => {
+                    this.toast.success('Atualizado com Sucesso');
+                    this.swapLoadingButton(false, true);
+                }, 2000);
+
             }, error => console.log(error));
 
         this.employeeDataService.updateUser(this.idUser, this.userData)
             .subscribe((data: any) => {
-                console.log(data);
-                this.toast.success('Atualizado com Sucesso');
+                setTimeout(() => {
+                    this.toast.success('Atualizado com Sucesso');
+                }, 2000);
+
             }, error => console.log(error));
     };
 
@@ -97,4 +102,5 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         return this.employeeData.permission === 'ADMIN'
             && this.employeeData.id !== this.idUserSession;
     };
+    
 }

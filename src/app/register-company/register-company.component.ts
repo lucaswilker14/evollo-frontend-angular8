@@ -25,6 +25,9 @@ export class RegisterCompanyComponent implements OnInit {
         employees: []
     };
 
+    isHiddenRegisterButton = false;
+    isHiddenLoadingButton = true;
+
     ngOnInit(): void {
     }
 
@@ -34,13 +37,19 @@ export class RegisterCompanyComponent implements OnInit {
 
     registerCompany = (event) => {
         this.validatedFormInputs(event);
+        this.swapLoadingButton(true, false);
         this.registerCompanyService.registerCompany(this.registerCompanyModel)
             .subscribe(data => {
-                    this.toast.success('Empresa cadastrada com Sucesso');
-                    this.router.navigate(['home']);
+                    setTimeout(() => {
+                        this.swapLoadingButton(false, true);
+                        this.toast.success('Empresa cadastrada com Sucesso');
+                        this.router.navigate(['home']);
+                    }, 2000);
+
                 },
                 error1 => {
                     console.log(error1);
+                    this.swapLoadingButton(false, true);
                     this.toast.error('Não foi possivel cadastrar empresa');
                 }
             );
@@ -53,6 +62,11 @@ export class RegisterCompanyComponent implements OnInit {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
+    };
+
+    swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
+        this.isHiddenRegisterButton = isHiddenRegister;
+        this.isHiddenLoadingButton = isHiddenLoading;
     };
 
 }
