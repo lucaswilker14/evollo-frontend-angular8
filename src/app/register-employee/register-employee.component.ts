@@ -1,8 +1,10 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterEmployeeService} from './register-employee.service';
 import {ToastrService} from 'ngx-toastr';
 import jwtDecode from 'jwt-decode';
+import {AppConstants} from '../app-constants';
+import {log} from 'util';
 
 @Component({
     selector: 'app-register-employee',
@@ -19,11 +21,14 @@ export class RegisterEmployeeComponent implements OnInit {
     isHiddenRegisterButton = false;
     isHiddenLoadingButton = true;
 
-    registerEmployee = {
+    selectedCompany = {};
+
+    registerEmployeeModel = {
         name: '',
         email: '',
         cpf: '',
         jobRole: '',
+        company: {},
         salary: '',
         permission: ''
     };
@@ -33,25 +38,29 @@ export class RegisterEmployeeComponent implements OnInit {
         {name: 'Admin', value: 'ADMIN'}
     ];
 
+    optionCompanyNames = [];
+
     constructor(private router: Router, private renderer: Renderer2,
                 private registerEmployeeService: RegisterEmployeeService, private toast: ToastrService) {
     }
 
     ngOnInit(): void {
+        this.getAllCompanies();
     }
 
     goBack = () => {
         this.router.navigate(['/home']);
     };
 
-    registerUser = (event) => {
+    registerEmployee = (event) => {
         this.swapLoadingButton(true, false);
         this.validatedFormInputs(event);
-        this.registerEmployeeService.registerEmployee(this.registerEmployee)
-            .subscribe(data => {
+        this.registerEmployeeModel.company = this.selectedCompany;
+        this.registerEmployeeService.registerEmployee(this.registerEmployeeModel)
+            .subscribe(() => {
                     this.swapLoadingButton(false, true);
                     this.toast.success('Funcionário Registrado com Sucesso!');
-                    this.toast.info('Email com credenciais enviado para o email ' + this.registerEmployee.email);
+                    this.toast.info('Email com credenciais enviado para o email ' + this.registerEmployeeModel.email);
                     this.router.navigate(['home']);
 
                 },
@@ -75,6 +84,13 @@ export class RegisterEmployeeComponent implements OnInit {
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
         this.isHiddenRegisterButton = isHiddenRegister;
         this.isHiddenLoadingButton = isHiddenLoading;
+    };
+
+    getAllCompanies = () => {
+        return this.registerEmployeeService.getAllCompanies()
+            .subscribe((data: any) => {
+                this.optionCompanyNames = data.map(company => company);
+            });
     };
 
 }

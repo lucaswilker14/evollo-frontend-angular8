@@ -9,10 +9,20 @@
     <div class="form-row mb-4">
         <div class="col">
             <label class="form-control-label" for="fullName"></label>
-            <input class="form-control" [(ngModel)]="registerEmployee.name" name="name" type="text" id="fullName"
+            <input class="form-control" [(ngModel)]="registerEmployeeModel.name" name="name" type="text" id="fullName"
                    placeholder="Nome Completo" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Nome é requirido</div>
+        </div>
+
+        <div class="col">
+            <label class="form-control-label" for="companyName"></label>
+            <select  [(ngModel)]="selectedCompany" name="selectedValue" class="form-control" id="companyName" required>
+                <option [disabled]="true" selected>Selecione a Empresa</option>
+                <option [ngValue]="op" *ngFor="let op of optionCompanyNames">{{op.companyName}}</option>
+            </select>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Empresa é requirido</div>
         </div>
     </div>
 
@@ -20,7 +30,7 @@
         <!--Email-->
         <div class="col">
             <label class="form-control-label" for="email"></label>
-            <input [(ngModel)]="registerEmployee.email" name="email" type="email" id="email" class="form-control"
+            <input [(ngModel)]="registerEmployeeModel.email" name="email" type="email" id="email" class="form-control"
                    placeholder="E-mail" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Email é requirido</div>
@@ -29,7 +39,7 @@
         <!--CPF-->
         <div class="col">
             <label class="form-control-label" for="cpf"></label>
-            <input [(ngModel)]="registerEmployee.cpf" name="cpf" type="text" id="cpf" class="form-control"
+            <input [(ngModel)]="registerEmployeeModel.cpf" name="cpf" type="text" id="cpf" class="form-control"
                    placeholder="CPF 111.000.111-56" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">CPF é requirido</div>
@@ -41,7 +51,7 @@
         <!--JobRole-->
         <div class="form-group col-md-6">
             <label class="form-control-label" for="jobRole"></label>
-            <input [(ngModel)]="registerEmployee.jobRole" name="jobRole" type="text" id="jobRole" class="form-control"
+            <input [(ngModel)]="registerEmployeeModel.jobRole" name="jobRole" type="text" id="jobRole" class="form-control"
                    placeholder="Cargo" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Cargo é requirido</div>
@@ -50,7 +60,7 @@
         <!--Salary-->
         <div class="form-group col-md-3">
             <label class="form-control-label" for="salary"></label>
-            <input [(ngModel)]="registerEmployee.salary" name="salary" type="text" class="form-control" id="salary"
+            <input [(ngModel)]="registerEmployeeModel.salary" name="salary" type="text" class="form-control" id="salary"
                    placeholder="Salário R$" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Salário é requirido</div>
@@ -59,7 +69,7 @@
         <!--Permissão-->
         <div class="form-group col-md-3">
             <label class="form-control-label" for="permission"></label>
-            <select [(ngModel)]="registerEmployee.permission" name="test" class="form-control" id="permission" required>
+            <select [(ngModel)]="registerEmployeeModel.permission" name="test" class="form-control" id="permission" required>
                 <option [disabled]="true" selected>Permissão do Sistema</option>
                 <option *ngFor="let op of optionPermissions" [ngValue]="op.value">{{op.name}}</option>
             </select>
@@ -78,10 +88,12 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button mdbBtn [hidden]="isHiddenRegisterButton" (click)="registerUser($event)" color="light-blue" block="true" class="my-4" type="button">
+            <button mdbBtn [hidden]="isHiddenRegisterButton" (click)="registerEmployee($event)" color="light-blue"
+                    block="true" class="my-4" type="button">
                 {{option}}
             </button>
-            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button" disabled>
+            <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button"
+                    disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Cadastrando...
             </button>

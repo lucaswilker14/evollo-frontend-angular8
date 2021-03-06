@@ -13,4 +13,8 @@ export class RegisterEmployeeService {
     registerEmployee = (employee) => {
         return this.http.post(AppConstants.baseApi + '/employee', employee, AppConstants.httpHearders);
     }
+
+    getAllCompanies = () => {
+        return this.http.get(AppConstants.baseApi + '/company', AppConstants.httpHearders);
+    }
 }
