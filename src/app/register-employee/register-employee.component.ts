@@ -1,10 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterEmployeeService} from './register-employee.service';
 import {ToastrService} from 'ngx-toastr';
-import jwtDecode from 'jwt-decode';
-import {AppConstants} from '../app-constants';
-import {log} from 'util';
 
 @Component({
     selector: 'app-register-employee',
@@ -53,9 +50,13 @@ export class RegisterEmployeeComponent implements OnInit {
     };
 
     registerEmployee = (event) => {
+
         this.swapLoadingButton(true, false);
+
         this.validatedFormInputs(event);
+
         this.registerEmployeeModel.company = this.selectedCompany;
+
         this.registerEmployeeService.registerEmployee(this.registerEmployeeModel)
             .subscribe(() => {
                     this.swapLoadingButton(false, true);
@@ -92,5 +93,6 @@ export class RegisterEmployeeComponent implements OnInit {
                 this.optionCompanyNames = data.map(company => company);
             });
     };
+
 
 }

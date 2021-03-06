@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppConstants} from '../app-constants';
-import jwtDecode from 'jwt-decode';
 
 @Injectable({
     providedIn: 'root'

@@ -17,7 +17,8 @@
 
         <div class="col">
             <label class="form-control-label" for="companyName"></label>
-            <select  [(ngModel)]="selectedCompany" name="selectedValue" class="form-control" id="companyName" required>
+            <select mdbDropdown [(ngModel)]="selectedCompany" name="selectedValue" class="form-control" id="companyName"
+                    required>
                 <option [disabled]="true" selected>Selecione a Empresa</option>
                 <option [ngValue]="op" *ngFor="let op of optionCompanyNames">{{op.companyName}}</option>
             </select>
@@ -51,7 +52,8 @@
         <!--JobRole-->
         <div class="form-group col-md-6">
             <label class="form-control-label" for="jobRole"></label>
-            <input [(ngModel)]="registerEmployeeModel.jobRole" name="jobRole" type="text" id="jobRole" class="form-control"
+            <input [(ngModel)]="registerEmployeeModel.jobRole" name="jobRole" type="text" id="jobRole"
+                   class="form-control"
                    placeholder="Cargo" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Cargo é requirido</div>
@@ -60,7 +62,8 @@
         <!--Salary-->
         <div class="form-group col-md-3">
             <label class="form-control-label" for="salary"></label>
-            <input [(ngModel)]="registerEmployeeModel.salary" name="salary" type="text" class="form-control" id="salary"
+            <input [(ngModel)]="registerEmployeeModel.salary" name="salary" type="number" class="form-control"
+                   id="salary"
                    placeholder="Salário R$" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Salário é requirido</div>
@@ -69,7 +72,8 @@
         <!--Permissão-->
         <div class="form-group col-md-3">
             <label class="form-control-label" for="permission"></label>
-            <select [(ngModel)]="registerEmployeeModel.permission" name="test" class="form-control" id="permission" required>
+            <select mdbDropdown [(ngModel)]="registerEmployeeModel.permission" name="test" class="form-control"
+                    id="permission" required>
                 <option [disabled]="true" selected>Permissão do Sistema</option>
                 <option *ngFor="let op of optionPermissions" [ngValue]="op.value">{{op.name}}</option>
             </select>
