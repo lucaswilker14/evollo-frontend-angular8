@@ -20,11 +20,8 @@ export class HomePageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // @ts-ignore
-        // const idUser: string = jwtDecode(localStorage.getItem('token')).id;
         this.getEmployeeLoged(this.idUser);
     }
-
 
     getEmployeeLoged = (id) => {
         this.http.get(AppConstants.baseApi + '/employee/' + id, AppConstants.httpHearders)
