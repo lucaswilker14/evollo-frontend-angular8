@@ -12,7 +12,7 @@ export class RegisterCompanyService {
     }
 
     registerCompany = (company) => {
-        return this.http.post(AppConstants.baseApi + '/company', company, AppConstants.httpHearders);
-
+        const url = AppConstants.baseApi + '/company';
+        return this.http.post(url, company, AppConstants.httpHearders);
     }
 }

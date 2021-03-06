@@ -16,12 +16,13 @@ export class RegisterCompanyComponent implements OnInit {
 
     @ViewChild('formControl') formControlHtml: ElementRef;
 
-    registerCompany: any = {
+    registerCompanyModel: any = {
         companyName: '',
         cnpj: '',
         companyCity: '',
         state: '',
-        address: ''
+        address: '',
+        employees: []
     };
 
     ngOnInit(): void {
@@ -31,13 +32,12 @@ export class RegisterCompanyComponent implements OnInit {
         this.router.navigate(['home']);
     };
 
-    registerUser = (event) => {
+    registerCompany = (event) => {
         this.validatedFormInputs(event);
-        this.registerCompanyService.registerCompany(this.registerCompany)
+        this.registerCompanyService.registerCompany(this.registerCompanyModel)
             .subscribe(data => {
-                    console.log(data);
                     this.toast.success('Empresa cadastrada com Sucesso');
-                    this.router.navigate(['']);
+                    this.router.navigate(['home']);
                 },
                 error1 => {
                     console.log(error1);
