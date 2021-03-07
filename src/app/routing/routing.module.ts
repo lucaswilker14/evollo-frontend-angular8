@@ -9,16 +9,18 @@ import {RegisterEmployeeComponent} from '../register-employee/register-employee.
 import {TableEmployeesComponent} from '../table-employees/table-employees.component';
 import {EmployeeDataComponent} from '../employee-data/employee-data.component';
 
+import {AuthGuards} from '../guards/auth.guards';
+import {PermissionGuard} from '../guards/permission.guard';
+
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
-    {path: 'home', component: HomePageComponent},
-    {path: 'company', component: RegisterCompanyComponent},
-    {path: 'registerEmployee', component: RegisterEmployeeComponent},
-    {path: 'employees', component: TableEmployeesComponent},
-    {path: 'employee/:id', component: EmployeeDataComponent},
+    {path: 'home', component: HomePageComponent, canActivate: [AuthGuards], canLoad: [AuthGuards] },
+    {path: 'company', component: RegisterCompanyComponent, canActivate: [AuthGuards, PermissionGuard], canLoad: [AuthGuards]},
+    {path: 'registerEmployee', component: RegisterEmployeeComponent, canActivate: [AuthGuards, PermissionGuard], canLoad: [AuthGuards]},
+    {path: 'employees', component: TableEmployeesComponent, canActivate: [AuthGuards, PermissionGuard], canLoad: [AuthGuards]},
+    {path: 'employee/:id', component: EmployeeDataComponent, canActivate: [AuthGuards], canLoad: [AuthGuards]},
 
 ];
-
 
 @NgModule({
     declarations: [],

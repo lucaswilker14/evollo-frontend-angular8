@@ -33,7 +33,7 @@ export class RegisterCompanyComponent implements OnInit {
 
     goBack = () => {
         this.router.navigate(['home']);
-    };
+    }
 
     registerCompany = (event) => {
         this.validatedFormInputs(event);
@@ -42,18 +42,12 @@ export class RegisterCompanyComponent implements OnInit {
             .subscribe(data => {
                     setTimeout(() => {
                         this.swapLoadingButton(false, true);
-                        this.toast.success('Empresa cadastrada com Sucesso');
+                        this.toast.success('Empresa cadastrada');
                         this.router.navigate(['home']);
                     }, 2000);
-
-                },
-                error1 => {
-                    console.log(error1);
-                    this.swapLoadingButton(false, true);
-                    this.toast.error('Não foi possivel cadastrar empresa');
                 }
             );
-    };
+    }
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -67,6 +61,6 @@ export class RegisterCompanyComponent implements OnInit {
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
         this.isHiddenRegisterButton = isHiddenRegister;
         this.isHiddenLoadingButton = isHiddenLoading;
-    };
+    }
 
 }

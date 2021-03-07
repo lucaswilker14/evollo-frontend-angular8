@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewInit, Output} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeDataService} from '../employee-data/employee-data.service';
-import {log} from 'util';
 
 @Component({
     selector: 'app-table-employees',
@@ -16,8 +15,8 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
     @ViewChild(MdbTablePaginationComponent, {static: true}) mdbTablePagination: MdbTablePaginationComponent;
     @ViewChild(MdbTableDirective, {static: true}) mdbTable: MdbTableDirective;
 
-    previous: any = [];
     headEmployees = ['ID', 'Nome', 'Email', 'Empresa', 'CPF', 'Permissão', ''];
+    private previous: any = [];
 
     constructor(private cdRef: ChangeDetectorRef, private router: Router,
                 private employeeDataService: EmployeeDataService) {
@@ -40,12 +39,12 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
         this.cdRef.detectChanges();
     }
 
-    goBack = () => {
+    goBackHome = () => {
         this.router.navigate(['home']);
-    };
+    }
 
     goUpdateView = (id) => {
-        this.router.navigate(['employee/' + id]);
-    };
+        this.router.navigate(['employee/' + id], {queryParams: {view: 'table'}});
+    }
 
 }

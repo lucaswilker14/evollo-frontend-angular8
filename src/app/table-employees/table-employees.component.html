@@ -6,7 +6,8 @@
         <table mdbTable #tableEl="mdbTable" class="z-depth-1">
             <thead class="grey lighten-1 black-text" style="justify-content: center">
             <tr>
-                <th *ngFor="let head of headEmployees; let i = index" scope="col" style="text-align: center">{{head}}</th>
+                <th *ngFor="let head of headEmployees; let i = index" scope="col"
+                    style="text-align: center">{{head}}</th>
             </tr>
             </thead>
             <tbody>
@@ -17,11 +18,10 @@
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.company.companyName}}</td>
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.cpf}}</td>
-<!--                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.jobRole}}</td>-->
-<!--                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.salary}}</td>-->
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.permission}}</td>
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                    <button style="margin-top: -2%" (click)="goUpdateView(el.id)" mdbBtn size="sm" type="button" color="primary" outline="true"
+                    <button style="margin-top: -2%" (click)="goUpdateView(el.id)" mdbBtn size="sm" type="button"
+                            color="primary" outline="true"
                             mdbWavesEffect>atualizar/deletar
                     </button>
                 </td>
@@ -38,6 +38,6 @@
     </div>
 </div>
 <div class="container flex-center" style="margin-top: 20px">
-    <button mdbBtn (click)="goBack()" type="button" color="primary" outline="true" mdbWavesEffect>Voltar</button>
+    <button mdbBtn (click)="goBackHome()" type="button" color="primary" outline="true" mdbWavesEffect>Voltar</button>
 </div>
 
