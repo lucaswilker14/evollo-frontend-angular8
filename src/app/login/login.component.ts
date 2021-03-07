@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
     user = {username: '', password: ''};
     @ViewChild('formControl') formControlHtml: ElementRef;
 
-    constructor(private loginService: AuthService, private renderer: Renderer2,
+    constructor(private authService: AuthService, private renderer: Renderer2,
                 private toast: ToastrService, private router: Router) {
     }
 
@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit{
 
     login = (event) => {
         this.validatedFormInputs(event);
-        this.loginService.login(this.user)
+        this.authService.login(this.user)
             .subscribe((data: any) => {
                     const token = data.accessToken;
                     localStorage.setItem('token', token);
-                    this.loginService.authenticateUser();
+                    this.authService.authenticateUser();
                     this.router.navigate(['home']);
                 }
             );

@@ -23,8 +23,8 @@ export class AuthService {
     }
 
     private handleError = (error: HttpErrorResponse) => {
-        this.toast.error('Username ou Senha Inválidos!');
-        console.log(error);
+        if (error.status === 400) { this.toast.error('Error no servidor. Credenciais Inválidas'); }
+        if (error.status === 401) { this.toast.error('Username ou Senha Inválidos!'); }
         return throwError(error);
     }
 
