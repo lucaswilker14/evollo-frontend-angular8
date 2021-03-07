@@ -1,16 +1,19 @@
 <app-header [title]=title></app-header>
 <app-svg-main></app-svg-main>
 
-<form class="container text-center border border-light p-5" style="margin-top: 10%">
+<form novalidate="" #formControl #updateForm="ngForm"
+      class=" was-validated container text-center border border-light p-5" style="margin-top: 10%">
 
     <p class="h4 mb-4">Dados</p>
 
     <!--Full Name-->
     <div class="form-row mb-4 md-form">
         <div class="col">
-            <label for="fullName">Nome</label>
-            <input class="form-control"
-                   [(ngModel)]="employeeData.name" name="name" type="text" id="fullName" mdbInput>
+            <label class="form-control-label" for="fullName">Nome</label>
+            <input class="form-control" [(ngModel)]="employeeData.name" name="name" type="text" id="fullName" required
+                   mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Nome não pode ser vazio</div>
         </div>
     </div>
 
@@ -18,7 +21,10 @@
         <!--Email-->
         <div class="col">
             <label class="form-control-label" for="email">Email</label>
-            <input [(ngModel)]="employeeData.email" name="email" type="email" id="email" class="form-control" mdbInput>
+            <input [(ngModel)]="this.employeeData.email" name="email" type="email" id="email" class="form-control"
+                   required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Email não pode ser vazio</div>
         </div>
 
         <!--CPF-->
@@ -26,6 +32,8 @@
             <label class="form-control-label" for="cpf">CPF</label>
             <input [disabled]="checkUpdatePermission()" [(ngModel)]="employeeData.cpf" name="cpf" type="text" id="cpf"
                    class="form-control" mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">CPF não pode ser vazio</div>
         </div>
     </div>
 
@@ -35,14 +43,18 @@
         <div class="md-form form-group col-md-6">
             <label class="form-control-label" for="jobRole">Cargo</label>
             <input [(ngModel)]="employeeData.jobRole" name="jobRole" type="text" id="jobRole" class="form-control"
-                   mdbInput>
+                   required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Cargo não pode ser vazio</div>
         </div>
 
         <!--Salary-->
         <div class="md-form form-group col-md-3">
             <label class="form-control-label" for="salary">Salário</label>
             <input [(ngModel)]="employeeData.salary" name="salary" type="text" class="form-control" id="salary"
-                   placeholder="Salário R$" mdbInput>
+                   placeholder="Salário R$" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Salário não pode ser vazio</div>
         </div>
 
         <!--Permissão-->
@@ -62,7 +74,9 @@
             <label class="form-control-label" for="username">Username</label>
             <input [disabled]="checkUpdatePermission()" [(ngModel)]="userData.username" name="username" type="text"
                    id="username" class="form-control"
-                   placeholder="Username" mdbInput>
+                   placeholder="Username" required mdbInput>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Username não pode ser vazio</div>
         </div>
 
         <!--Password-->
@@ -70,6 +84,7 @@
             <label class="form-control-label" for="password">Password</label>
             <input [disabled]="checkUpdatePermission()" #password type="password" id="password" class="form-control"
                    mdbInput>
+
         </div>
     </div>
 
@@ -82,8 +97,9 @@
         </div>
         <div class="col">
             <!-- Sign up button -->
-            <button [hidden]="isHiddenUpdateButton" mdbBtn (click)="update()" color="light-blue" block="true"
-                    class="my-4" type="button">
+            <button [disabled]="!updateForm.valid" [hidden]="isHiddenUpdateButton" mdbBtn (click)="update($event)"
+                    color="light-blue" block="true"
+                    class="my-4" type="submit">
                 Atualizar
             </button>
             <button mdbBtn [hidden]="isHiddenLoadingButton" class="my-4" block="true" color="light-blue" type="button"

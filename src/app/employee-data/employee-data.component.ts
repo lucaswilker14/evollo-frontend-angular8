@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeDataService} from './employee-data.service';
@@ -12,21 +12,24 @@ import {ToastrService} from 'ngx-toastr';
 export class EmployeeDataComponent implements OnInit, OnDestroy {
 
     @ViewChild('password') password: ElementRef;
+    @ViewChild('formControl') formControlHtml: ElementRef;
 
     isHiddenUpdateButton = false;
     isHiddenLoadingButton = true;
 
     @Input() title = 'Dados Usuário';
 
-    employeeData: any = {
+
+    employeeData = {
+        id: '',
         name: '',
         email: '',
         cpf: '',
         jobRole: '',
         salary: '',
-        role: ''
+        permission: ''
     };
-    userData: any = {
+    userData = {
         name: '',
         username: '',
         password: ''
@@ -44,7 +47,8 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
 
 
     constructor(private employeeDataService: EmployeeDataService, private router: Router,
-                private toast: ToastrService, private activedRoute: ActivatedRoute, private activatedRoute: ActivatedRoute) {
+                private toast: ToastrService, private activedRoute: ActivatedRoute,
+                private activatedRoute: ActivatedRoute, private renderer: Renderer2) {
     }
 
 
@@ -67,16 +71,31 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.userData = {};
-        this.employeeData = {};
+        this.employeeData = {
+            id: '',
+            name: '',
+            email: '',
+            cpf: '',
+            jobRole: '',
+            salary: '',
+            permission: ''
+        };
+        this.userData = {
+            name: '',
+            username: '',
+            password: ''
+        };
     }
 
     goBack = () => {
         this.isTableView ? this.router.navigate(['employees']) : this.router.navigate(['home']);
-    };
+    }
 
-    update = () => {
+    update = (event) => {
+
         this.swapLoadingButton(true, false);
+        this.validatedFormInputs(event);
+
         this.userData.password = this.password.nativeElement.value;
         this.userData.name = this.employeeData.name;
 
@@ -86,15 +105,14 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
                     this.toast.success('Atualizado com Sucesso');
                     this.swapLoadingButton(false, true);
                 }, 2000);
-
-            }, error => console.log(error));
+            }, () => this.swapLoadingButton(false, true));
 
         this.employeeDataService.updateUser(this.idUser, this.userData)
             .subscribe(() => {
                 setTimeout(() => {
+                    this.swapLoadingButton(false, true);
                 }, 2000);
-
-            }, error => console.log(error));
+            }, () => this.swapLoadingButton(false, true));
     }
 
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
@@ -107,14 +125,22 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
             && this.employeeData.id !== this.idUserSession;
     }
 
-
     checkIsTableView = () => {
         this.activatedRoute.queryParamMap
             .subscribe((params) => {
-                if (params.get('view') !== null) {
+                if (params.get('goBackView') !== null) {
                     this.isTableView = true;
                 }
             });
+    }
+
+    validatedFormInputs = (event) => {
+        const InputFormControl = this.formControlHtml.nativeElement[0];
+        if (InputFormControl.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
     }
 
 }

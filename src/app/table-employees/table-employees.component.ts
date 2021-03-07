@@ -44,7 +44,7 @@ export class TableEmployeesComponent implements OnInit, AfterViewInit {
     }
 
     goUpdateView = (id) => {
-        this.router.navigate(['employee/' + id], {queryParams: {view: 'table'}});
+        this.router.navigate(['employee/' + id], {queryParams: {goBackView: 'table'}});
     }
 
 }

@@ -56,7 +56,7 @@ export class RegisterCompanyComponent implements OnInit {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    };
+    }
 
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
         this.isHiddenRegisterButton = isHiddenRegister;
