@@ -47,14 +47,12 @@ export class RegisterEmployeeComponent implements OnInit {
 
     goBack = () => {
         this.router.navigate(['/home']);
-    };
+    }
 
     registerEmployee = (event) => {
 
         this.swapLoadingButton(true, false);
-
         this.validatedFormInputs(event);
-
         this.registerEmployeeModel.company = this.selectedCompany;
 
         this.registerEmployeeService.registerEmployee(this.registerEmployeeModel)
@@ -66,12 +64,10 @@ export class RegisterEmployeeComponent implements OnInit {
 
                 },
                 error => {
-                    console.log(error);
                     this.swapLoadingButton(false, true);
-                    this.toast.error('Não foi possivel cadastrar funcionário');
                 }
             );
-    };
+    }
 
     validatedFormInputs = (event) => {
         const InputFormControl = this.formControlHtml.nativeElement[0];
@@ -80,19 +76,19 @@ export class RegisterEmployeeComponent implements OnInit {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
-    };
+    }
 
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
         this.isHiddenRegisterButton = isHiddenRegister;
         this.isHiddenLoadingButton = isHiddenLoading;
-    };
+    }
 
     getAllCompanies = () => {
         return this.registerEmployeeService.getAllCompanies()
             .subscribe((data: any) => {
                 this.optionCompanyNames = data.map(company => company);
             });
-    };
+    }
 
 
 }

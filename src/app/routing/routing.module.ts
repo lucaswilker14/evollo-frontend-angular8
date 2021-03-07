@@ -8,6 +8,7 @@ import {RegisterCompanyComponent} from '../register-company/register-company.com
 import {RegisterEmployeeComponent} from '../register-employee/register-employee.component';
 import {TableEmployeesComponent} from '../table-employees/table-employees.component';
 import {EmployeeDataComponent} from '../employee-data/employee-data.component';
+
 import {AuthGuards} from '../guards/auth.guards';
 import {PermissionGuard} from '../guards/permission.guard';
 

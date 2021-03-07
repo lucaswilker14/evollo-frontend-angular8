@@ -23,7 +23,7 @@ export class AuthGuards implements CanActivate, CanLoad {
     private goLogin = () => {
         this.router.navigate(['']);
         return false;
-    };
+    }
 
 
 }

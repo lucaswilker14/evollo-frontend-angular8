@@ -16,7 +16,7 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
     isHiddenUpdateButton = false;
     isHiddenLoadingButton = true;
 
-    @Input() tittle = 'Dados Usuário';
+    @Input() title = 'Dados Usuário';
 
     employeeData: any = {
         name: '',
@@ -26,7 +26,6 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         salary: '',
         role: ''
     };
-
     userData: any = {
         name: '',
         username: '',
@@ -38,20 +37,21 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         {name: 'Admin', value: 'ADMIN'}
     ];
 
-    idUser;
-    idUserSession;
+    private idUser;
+    private idUserSession;
+
+    isTableView: boolean;
 
 
     constructor(private employeeDataService: EmployeeDataService, private router: Router,
-                private toast: ToastrService, private activedRoute: ActivatedRoute) {
+                private toast: ToastrService, private activedRoute: ActivatedRoute, private activatedRoute: ActivatedRoute) {
     }
 
-    ngOnDestroy(): void {
-        this.userData = {};
-        this.employeeData = {};
-    }
 
     ngOnInit(): void {
+
+        this.checkIsTableView();
+
         // @ts-ignore
         this.idUserSession = jwtDecode(localStorage.getItem('token')).id;
 
@@ -66,8 +66,13 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
             });
     }
 
+    ngOnDestroy(): void {
+        this.userData = {};
+        this.employeeData = {};
+    }
+
     goBack = () => {
-        this.router.navigate(['home']);
+        this.isTableView ? this.router.navigate(['employees']) : this.router.navigate(['home']);
     };
 
     update = () => {
@@ -76,7 +81,7 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         this.userData.name = this.employeeData.name;
 
         this.employeeDataService.updateEmployee(this.idUser, this.employeeData)
-            .subscribe((data: any) => {
+            .subscribe(() => {
                 setTimeout(() => {
                     this.toast.success('Atualizado com Sucesso');
                     this.swapLoadingButton(false, true);
@@ -85,22 +90,31 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
             }, error => console.log(error));
 
         this.employeeDataService.updateUser(this.idUser, this.userData)
-            .subscribe((data: any) => {
+            .subscribe(() => {
                 setTimeout(() => {
-                    this.toast.success('Atualizado com Sucesso');
                 }, 2000);
 
             }, error => console.log(error));
-    };
+    }
 
     swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
         this.isHiddenUpdateButton = isHiddenRegister;
         this.isHiddenLoadingButton = isHiddenLoading;
-    };
+    }
 
     checkUpdatePermission = () => {
         return this.employeeData.permission === 'ADMIN'
             && this.employeeData.id !== this.idUserSession;
-    };
-    
+    }
+
+
+    checkIsTableView = () => {
+        this.activatedRoute.queryParamMap
+            .subscribe((params) => {
+                if (params.get('view') !== null) {
+                    this.isTableView = true;
+                }
+            });
+    }
+
 }
