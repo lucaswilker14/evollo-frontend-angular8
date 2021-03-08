@@ -1,11 +1,11 @@
 <app-header title="Home"></app-header>
 <app-svg-main></app-svg-main>
 
-<div class="container" style="padding-top: 10%; max-width: inherit">
+<div class="container" [style.width]="this.role.includes('ROLE_ADMIN') ? '100%' : '30%'"  style="padding-top: 10%; max-width: inherit">
     <div class="card-deck">
 
         <!-- Card -->
-        <mdb-card>
+        <mdb-card [hidden]="!this.role.includes('ROLE_ADMIN')">
             <div class="view" mdbWavesEffect>
                 <!-- Card img -->
                 <mdb-card-img class="img-fluid" src="/assets/images/new_company.jpeg"
@@ -28,7 +28,7 @@
         </mdb-card>
 
         <!-- Card -->
-        <mdb-card>
+        <mdb-card [hidden]="!this.role.includes('ROLE_ADMIN')">
             <div class="view " mdbWavesEffect>
                 <!-- Card img -->
                 <mdb-card-img src="/assets/images/new_employee.jpeg" alt="Card image cap"></mdb-card-img>
@@ -50,7 +50,7 @@
         </mdb-card>
 
         <!-- Card -->
-        <mdb-card>
+        <mdb-card [hidden]="!this.role.includes('ROLE_ADMIN')">
             <div class="view" mdbWavesEffect>
                 <!-- Card img -->
                 <mdb-card-img src="/assets/images/all_employees.jpeg" alt="Card image cap"></mdb-card-img>
@@ -87,7 +87,7 @@
                 </mdb-card-title>
 
                 <div class="row justify-content-center">
-                    <button [routerLink]="['/employee/:id']" mdbBtn size="sm" type="button" color="primary"
+                    <button [routerLink]="['/employee/', idUser ]" mdbBtn size="sm" type="button" color="primary"
                             rounded="true" outline="true" mdbWavesEffect>Ir!
                     </button>
                 </div>

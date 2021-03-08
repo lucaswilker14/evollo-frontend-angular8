@@ -11,24 +11,14 @@ import jwtDecode from 'jwt-decode';
 })
 export class HomePageComponent implements OnInit {
 
-    @Output() yourDataEmployee = {};
+    // @ts-ignore
+    role = jwtDecode(localStorage.getItem('token')).role.map(auth => auth.authority);
 
-    constructor(private router: Router, private http: HttpClient) {
-    }
+    // @ts-ignore
+    idUser = jwtDecode(localStorage.getItem('token')).id;
 
-    ngOnInit(): void {
-        // @ts-ignore
-        const id = jwtDecode(localStorage.getItem('token')).id;
-        console.log(id);
-        this.getEmployeeLoged(id);
-    }
+    constructor() {}
 
-    getEmployeeLoged = (id) => {
-        this.http.get(AppConstants.baseApi + '/employee/' + id, AppConstants.httpHearders)
-            .subscribe(data => {
-                // @ts-ignore
-                // @ts-ignore
-                this.yourDataEmployee = data.body.employee;
-            });
-    };
+    ngOnInit(): void {}
+
 }

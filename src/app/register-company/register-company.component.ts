@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import {RegisterCompanyService} from './register-company.service';
 import {ToastrService} from 'ngx-toastr';
@@ -8,7 +8,7 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './register-company.component.html',
     styleUrls: ['./register-company.component.css']
 })
-export class RegisterCompanyComponent implements OnInit, OnDestroy {
+export class RegisterCompanyComponent implements OnInit {
 
     constructor(private router: Router, private registerCompanyService: RegisterCompanyService,
                 private toast: ToastrService, private renderer: Renderer2) {
@@ -16,43 +16,35 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
 
     @ViewChild('formControl') formControlHtml: ElementRef;
 
-    registerCompany: any = {
+    registerCompanyModel: any = {
         companyName: '',
         cnpj: '',
         companyCity: '',
         state: '',
-        address: ''
+        address: '',
+        employees: []
     };
 
+    isHiddenRegisterButton = false;
+    isHiddenLoadingButton = true;
+
     ngOnInit(): void {
-    }
-
-
-    ngOnDestroy(): void {
-        this.registerCompany = {
-            companyName: '',
-            cnpj: '',
-            companyCity: '',
-            state: '',
-            address: ''
-        };
     }
 
     goBack = () => {
         this.router.navigate(['home']);
     }
 
-    registerUser = (event) => {
+    registerCompany = (event) => {
         this.validatedFormInputs(event);
-        this.registerCompanyService.registerCompany(this.registerCompany)
+        this.swapLoadingButton(true, false);
+        this.registerCompanyService.registerCompany(this.registerCompanyModel)
             .subscribe(data => {
-                    console.log(data);
-                    this.toast.success('Empresa cadastrada com Sucesso');
-                    this.router.navigate(['']);
-                },
-                error1 => {
-                    console.log(error1);
-                    this.toast.error('Não foi possivel cadastrar empresa');
+                    setTimeout(() => {
+                        this.swapLoadingButton(false, true);
+                        this.toast.success('Empresa cadastrada');
+                        this.router.navigate(['home']);
+                    }, 2000);
                 }
             );
     }
@@ -64,6 +56,11 @@ export class RegisterCompanyComponent implements OnInit, OnDestroy {
             event.stopPropagation();
         }
         this.renderer.addClass(this.formControlHtml.nativeElement, 'was-validated');
+    }
+
+    swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
+        this.isHiddenRegisterButton = isHiddenRegister;
+        this.isHiddenLoadingButton = isHiddenLoading;
     }
 
 }
