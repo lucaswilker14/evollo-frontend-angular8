@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  evollo-backend:
+    build: .
+    image: evollo-frontend
+    ports:
+      - 4200:4200
