@@ -14,11 +14,10 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
     @ViewChild('password') password: ElementRef;
     @ViewChild('formControl') formControlHtml: ElementRef;
 
-    isHiddenUpdateButton = false;
+    isHiddenNormalButton = false;
     isHiddenLoadingButton = true;
 
     @Input() title = 'Dados Usuário';
-
 
     employeeData = {
         id: '',
@@ -40,8 +39,8 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         {name: 'Admin', value: 'ADMIN'}
     ];
 
-    private idUser;
-    private idUserSession;
+    idUser;
+    idUserSession;
 
     isTableView: boolean;
 
@@ -65,6 +64,7 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
 
         this.employeeDataService.getEmployeeById(this.idUser)
             .subscribe((data: any) => {
+                console.log(data);
                 this.employeeData = data.body.employee;
                 this.userData = data.body.user;
             });
@@ -99,6 +99,9 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
         this.userData.password = this.password.nativeElement.value;
         this.userData.name = this.employeeData.name;
 
+        console.log(this.employeeData);
+        console.log(this.userData);
+
         this.employeeDataService.updateEmployee(this.idUser, this.employeeData)
             .subscribe(() => {
                 setTimeout(() => {
@@ -115,8 +118,20 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
             }, () => this.swapLoadingButton(false, true));
     }
 
-    swapLoadingButton = (isHiddenRegister: boolean, isHiddenLoading: boolean) => {
-        this.isHiddenUpdateButton = isHiddenRegister;
+    delete = () => {
+        this.swapLoadingButton(true, false);
+        this.employeeDataService.delete(this.idUser)
+            .subscribe(() => {
+                setTimeout(() => {
+                    this.swapLoadingButton(false, true);
+                    this.toast.warning('Usuário deletado!');
+                    this.router.navigate(['employees']);
+                }, 2000);
+            });
+    }
+
+    swapLoadingButton = (isHiddenNormalButton: boolean, isHiddenLoading: boolean) => {
+        this.isHiddenNormalButton = isHiddenNormalButton;
         this.isHiddenLoadingButton = isHiddenLoading;
     }
 

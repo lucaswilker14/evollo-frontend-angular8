@@ -33,15 +33,19 @@ export class EmployeeDataService {
     updateUser = (id, user) => {
         console.log(user);
         // @ts-ignore
-        // const id = jwtDecode(localStorage.getItem('token')).id;
         const url = AppConstants.baseApi + '/user/' + id;
         return this.http.put(url, user, AppConstants.httpHearders)
             .pipe(catchError(this.handlerError));
     }
 
+    delete = (id) => {
+        return this.http.delete(AppConstants.baseApi + '/employee/' + id, AppConstants.httpHearders)
+            .pipe(catchError(this.handlerError));
+    }
+
     private handlerError = (error: HttpErrorResponse) => {
         if (error.status === 400) {
-            this.toast.error('Não foi possível atualizar. Dados Inválidos');
+            this.toast.error('Não foi possível atualizar/deletar. Dados Inválidos');
         }
         return throwError(error);
     }
