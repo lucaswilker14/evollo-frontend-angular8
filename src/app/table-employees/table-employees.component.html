@@ -1,0 +1,43 @@
+<app-header title="Funcionários"></app-header>
+<app-svg-main></app-svg-main>
+<div class="container" style="margin-top: 5%">
+
+    <div class="card">
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+            <thead class="grey lighten-1 black-text" style="justify-content: center">
+            <tr>
+                <th *ngFor="let head of headEmployees; let i = index" scope="col"
+                    style="text-align: center">{{head}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="text-align: center" *ngFor="let el of employees; let i = index">
+                <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                    scope="row">{{el.id}}</th>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.company.companyName}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.cpf}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.permission}}</td>
+                <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                    <button style="margin-top: -2%" (click)="goUpdateView(el.id)" mdbBtn size="sm" type="button"
+                            color="primary" outline="true"
+                            mdbWavesEffect>atualizar/deletar
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+            <tr>
+                <td colspan="20">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="employees"></mdb-table-pagination>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="container flex-center" style="margin-top: 20px">
+    <button mdbBtn (click)="goBackHome()" type="button" color="primary" outline="true" mdbWavesEffect>Voltar</button>
+</div>
+
