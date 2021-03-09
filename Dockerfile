@@ -2,18 +2,15 @@ FROM node:alpine
 
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm install
+RUN npm install --silent
 
 COPY . /app
 
 EXPOSE 4200
 
 # start app
-CMD ng serve --host 0.0.0.0
+CMD node_modules/.bin/ng serve --host 0.0.0.0
 

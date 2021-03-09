@@ -42,7 +42,8 @@
         <!--JobRole-->
         <div class="md-form form-group col-md-6">
             <label class="form-control-label" for="jobRole">Cargo</label>
-            <input [(ngModel)]="employeeData.jobRole" name="jobRole" type="text" id="jobRole" class="form-control"
+            <input [disabled]="employeeData.permission === 'USER'" [(ngModel)]="employeeData.jobRole" name="jobRole"
+                   type="text" id="jobRole" class="form-control"
                    required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Cargo não pode ser vazio</div>
@@ -51,7 +52,8 @@
         <!--Salary-->
         <div class="md-form form-group col-md-3">
             <label class="form-control-label" for="salary">Salário</label>
-            <input [(ngModel)]="employeeData.salary" name="salary" type="text" class="form-control" id="salary"
+            <input [disabled]="employeeData.permission === 'USER'" [(ngModel)]="employeeData.salary" name="salary"
+                   type="text" class="form-control" id="salary"
                    placeholder="Salário R$" required mdbInput>
             <div class="valid-feedback"></div>
             <div class="invalid-feedback">Salário não pode ser vazio</div>
@@ -109,24 +111,34 @@
             </button>
             <div>
                 <!-- Sign up button -->
-                <button [hidden]="this.idUserSession == idUser" mdbBtn (click)="basicModal.show()" color="red" block="true" class="my-4" type="button">
+                <button [hidden]="this.idUserSession == idUser" mdbBtn (click)="basicModal.show()" color="red"
+                        block="true" class="my-4" type="button">
                     Deletar
                 </button>
                 <div class="container">
-                    <div mdbModal #basicModal="mdbModal" class="modal fade" style="padding-top: 10%" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+                    <div mdbModal #basicModal="mdbModal" class="modal fade" style="padding-top: 10%" tabindex="-1"
+                         role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                    <button type="button" class="close pull-right" aria-label="Close"
+                                            (click)="basicModal.hide()">
                                         <span aria-hidden="true">×</span>
                                     </button>
-                                    <h4 class="modal-title w-100" id="myModalLabel">Tem certeza que deseja deletar {{this.employeeData.name}} ? </h4>
+                                    <h4 class="modal-title w-100" id="myModalLabel">Tem certeza que deseja
+                                        deletar {{this.employeeData.name}} ? </h4>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" mdbBtn color="red" outline="true" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Não</button>
-                                    <button [hidden]="isHiddenNormalButton" type="button" (click)="delete()" mdbBtn color="red" class="relative waves-light" mdbWavesEffect>Deletar</button>
-                                    <button [hidden]="isHiddenLoadingButton" type="button" mdbBtn color="red" class="relative waves-light" mdbWavesEffect>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <button type="button" mdbBtn color="red" outline="true" class="waves-light"
+                                            aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Não
+                                    </button>
+                                    <button [hidden]="isHiddenNormalButton" type="button" (click)="delete()" mdbBtn
+                                            color="red" class="relative waves-light" mdbWavesEffect>Deletar
+                                    </button>
+                                    <button [hidden]="isHiddenLoadingButton" type="button" mdbBtn color="red"
+                                            class="relative waves-light" mdbWavesEffect>
+                                        <span class="spinner-border spinner-border-sm" role="status"
+                                              aria-hidden="true"></span>
                                         Deletando...
                                     </button>
                                 </div>
