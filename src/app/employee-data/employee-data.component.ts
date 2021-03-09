@@ -127,7 +127,7 @@ export class EmployeeDataComponent implements OnInit, OnDestroy {
                     this.toast.warning('Usuário deletado!');
                     this.router.navigate(['employees']);
                 }, 2000);
-            });
+            }, () => this.swapLoadingButton(false, true));
     }
 
     swapLoadingButton = (isHiddenNormalButton: boolean, isHiddenLoading: boolean) => {

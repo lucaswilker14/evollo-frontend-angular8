@@ -1,9 +1,10 @@
 import {HttpHeaders} from '@angular/common/http';
+import {environment} from '../environments/environment';
 
 export class AppConstants {
 
     public static get baseApi(): string {
-        return 'http://localhost:8080/evollo/api';
+        return `http://${environment.IP}:${environment.PORT}/evollo/api`;
     }
 
     public static get httpHearders(): any {

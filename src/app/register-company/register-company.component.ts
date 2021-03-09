@@ -39,13 +39,13 @@ export class RegisterCompanyComponent implements OnInit {
         this.validatedFormInputs(event);
         this.swapLoadingButton(true, false);
         this.registerCompanyService.registerCompany(this.registerCompanyModel)
-            .subscribe(data => {
+            .subscribe(() => {
                     setTimeout(() => {
                         this.swapLoadingButton(false, true);
                         this.toast.success('Empresa cadastrada');
                         this.router.navigate(['home']);
                     }, 2000);
-                }
+                }, () => this.swapLoadingButton(false, true)
             );
     }
 
