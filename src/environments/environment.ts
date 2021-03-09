@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  IP: window.location.hostname
+  IP: window.location.hostname,
+  PORT: '8080'
 };
 
 /*
