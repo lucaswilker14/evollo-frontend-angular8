@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  evollo-frontend:
+  practices-lab:
     build: .
-    image: evollo-frontend
+    image: practices-lab-frontend
     ports:
       - 4200:4200

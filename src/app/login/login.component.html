@@ -8,9 +8,8 @@
                     <div class="row flex-center pt-5 mt-3 w-100">
                         <div class="col-md-6 text-center text-md-left mb-5">
                             <div class="black-text">
-                                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Prova
-                                    Técnica
-                                    Evollo! </h2>
+                                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Practices
+                                    Labs </h2>
                                 <hr class="hr-dark wow fadeInLeft" data-wow-delay="0.3s">
                                 <br>
                                 <a mdbBtn href="https://github.com/lucaswilker14?tab=repositories" target="_blank"
@@ -34,7 +33,8 @@
                                         </div>
                                         <!--Body-->
                                         <div class="md-form">
-                                            <label class="text-black-50 form-control-label" for="username">Username:</label>
+                                            <label class="text-black-50 form-control-label"
+                                                   for="username">Username:</label>
                                             <input type="text" class="text-black-50 form-control" id="username"
                                                    name="username" [(ngModel)]="user.username" required mdbInput>
                                             <div class="valid-feedback"></div>
@@ -42,16 +42,14 @@
                                         </div>
                                         <div class="md-form">
                                             <label class="text-black-50 form-control-label"
-                                                   for="password">Password:</label>
+                                                   for="password">Senha:</label>
                                             <input type="password" class="text-black-50 form-control" id="password"
                                                    name="password" [(ngModel)]="user.password" required mdbInput>
                                             <div class="valid-feedback"></div>
-                                            <div class="invalid-feedback">Password é requerido</div>
+                                            <div class="invalid-feedback">Senha é requerida</div>
                                         </div>
                                         <div class="text-center mt-4">
-                                            <button (click)="login($event)" mdbBtn color="blue-grey" mdbWavesEffect>Sign
-                                                in
-                                            </button>
+                                            <button (click)="login($event)" mdbBtn color="blue-grey" mdbWavesEffect>Entrar</button>
                                         </div>
                                     </mdb-card-body>
                                 </mdb-card>
