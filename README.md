@@ -1,4 +1,4 @@
-# Frontend - Prova Técnica Evollo
+# Frontend - Practices Lab - Angular 11
 
 **Objetivo**: Visualização e execução das chamadas ao backend.
 
